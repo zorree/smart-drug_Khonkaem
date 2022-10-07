@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+    <div style="text-align: center;"> 
+    ผู้ปฏิบัติงาน : {{username}}
+   </div>
+    </ion-title>  
+  
+    <ion-buttons slot="end">
+      <ion-icon  size="large" name="exit-outline" (click)="__exitApp();"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-button class="btn btn-primary vertical-center btn-main" (click)="__scan_add_drug();">
+ 
+  <!-- <ion-button class="btn btn-primary vertical-center btn-main" (click)="_test_transaction();"> -->
+  
+   <ion-icon name="qr-code-outline"></ion-icon>
+</ion-button>
+ 
+
+
+  <div id="container"  *ngFor= "let item of json; index as i">
+    <ion-card class="center">
+      <ion-card-header>
+        <ion-card-title  class="center" >  </ion-card-title>
+      </ion-card-header>
+       <img src="data:image/png;base64,{{item.b64}}" alt="NO IMAGE">
+
+      <ion-card-header>
+        <ion-card-title  class="center" >{{item.drug}} </ion-card-title>
+        <ion-button class="btn btn-info" (click)="option_add_drug(item.position,item.box_transaction);">เติมยา</ion-button>
+
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Box Transaction</ion-label>
+          <ion-badge class="size-badge"  slot="end" color="danger">{{item.box_transaction}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>รหัส ยืนยัน</ion-label>
+          <ion-input type="text" placeholder="รหัส ยืนยัน" [(ngModel)]='box_input'></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label >ที่ตั้ง</ion-label>
+          <ion-badge class="size-badge"  slot="end"  color="medium">{{item.position}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label >Prepack</ion-label>
+          <ion-badge class="size-badge"  slot="end" color="warning">{{item.prepack}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>จำนวน</ion-label>
+          <ion-badge class="size-badge" slot="end" color="warning">{{item.qty}}</ion-badge>
+       </ion-item>
+          <ion-item>
+           <ion-label>ยอดรวม</ion-label>
+           <ion-badge class="size-badge" slot="end" color="warning">{{item.qty}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>วันที่</ion-label>
+          <ion-badge class="size-badge" slot="end" color="danger">{{item.date}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>ออกรายการ เดิมยา โดย</ion-label>
+          <ion-badge class="size-badge" slot="end"  color="tertiary">{{item.prepare_agent}}</ion-badge>
+        </ion-item>
+        <br>
+        <div class="center" >
+          <ion-button class="btn btn-primary" (click)="__scan_Confirm(i);">ยืนยัน โดย Scan QR Code </ion-button>
+            <ion-button color="success" (click)="__add_Confirm(i);">ยืนยัน</ion-button>
+            <ion-button color="danger" (click)="__cancel_add();">ยกเลิก</ion-button>
+        </div>
+       
+      </ion-card-content>
+    </ion-card>
+ 
+ 
+  </div>

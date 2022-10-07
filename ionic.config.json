@@ -1,0 +1,7 @@
+{
+  "name": "smart-drug",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
